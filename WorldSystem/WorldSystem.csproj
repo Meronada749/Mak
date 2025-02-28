@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WorldSystem\enum&amp;Struct\Material_List.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Material.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Category.cs" />
     <Compile Include="WorldSystem\IItem.cs" />

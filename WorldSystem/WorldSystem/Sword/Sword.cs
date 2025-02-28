@@ -8,7 +8,7 @@ using System;
 using System.Numerics;
 namespace WorldSystem
 {
-    internal class Sword : ISword
+    internal sealed class Sword : ISword
     {
         public Rarity Rarity { get; private set; }
         public Category Category { get; private set; } = Category.Sword;
@@ -86,7 +86,7 @@ namespace WorldSystem
         }
         public string ToCsvLine()
         {
-            return $"{Category},{Rarity},{SwordName},{SwordPrice},{Resource.Material.Name},{Resource.Material.Price},{Resource.Material.Weight},{Quantity},{SwordDamage}";
+            return $"{Category},{Rarity},{Quantity},{Resource.Material.Name},{SwordWeight},{SwordName},{SwordPrice},{SwordDamage}";
         }
     }
 }

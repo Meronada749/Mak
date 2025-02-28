@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using static WorldSystem.Material_List;
 
 namespace WorldSystem
 {
@@ -44,16 +45,7 @@ namespace WorldSystem
 
             Array rarity = Enum.GetValues(typeof(Rarity));
 
-            List<Material> Materials = new List<Material>()
-            {
-                new Material(name:"wood", weight:1, price:10),
-                new Material(name:"stone", weight:2, price:20),
-                new Material(name:"iron", weight:3, price:30),
-                new Material(name:"steel", weight:4, price:40),
-                new Material(name:"silver", weight:5, price:50),
-                new Material(name:"gold", weight:6, price:60),
-                new Material(name:"diamond", weight:7, price:70)
-            };
+
 
             List<IItem> worldItems = new List<IItem>()
             {
@@ -170,7 +162,7 @@ namespace WorldSystem
                 else
                 {
                     Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y + 1);
-                    Console.Write("Entrée invalide. Veuillez entrer un nombre entier.");
+                    Console.Write("Entrée invalide. Veuillez entrer un nombre entier.  ");
                     Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                     Console.Write("                                                                                           ");
                     Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);

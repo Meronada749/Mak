@@ -8,7 +8,7 @@ using System;
 using System.Numerics;
 namespace WorldSystem
 {
-    internal class Resource : IResource
+    internal sealed class Resource : IResource
     {
         public Rarity Rarity { get; private set; }
         public Category Category { get; private set; } = Category.Resource;
@@ -36,7 +36,9 @@ namespace WorldSystem
             foreach (string item in str)
             {
                 Console.SetCursorPosition((int)Position.X, (int)Position.Y);
-                Console.Write("                                                                                           ");
+                Console.WriteLine("                                                                                           ");
+                Console.WriteLine("                                                                                           ");
+                Console.WriteLine("                                                                                           ");
                 Console.SetCursorPosition((int)Position.X, (int)Position.Y++);
                 Console.Write(item);
             }
@@ -49,7 +51,7 @@ namespace WorldSystem
 
         public string ToCsvLine()
         {
-            return $"{Category},{Rarity},{Material.Name},{Material.Price},{Material.Weight},{Quantity}";
+            return $"{Category},{Rarity},{Quantity},{Material.Name},{Material.Price},{Material.Weight}";
         }
     }
 }
