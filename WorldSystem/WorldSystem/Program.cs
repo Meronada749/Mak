@@ -128,7 +128,7 @@ namespace WorldSystem
                 Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                 Console.Write("                                                                                           ");
                 Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
-                Console.Write("Entrer le numero de l'objet de 0 à " + (worldItems.Count - 1) + "): ");
+                Console.Write("Entrer le numero de l'objet de 0 à " + (worldItems.Count - 1) + ": ");
 
                 // Read the user input
                 string input = Console.ReadLine();
@@ -159,7 +159,7 @@ namespace WorldSystem
                     }
                     else
                     { 
-                        Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y+1);
+                        Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y + 1);
                         Console.Write("Index hors limites. Veuillez entrer un index valide.");
                         Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                         Console.Write("                                                                                           ");
@@ -169,13 +169,13 @@ namespace WorldSystem
                 }
                 else
                 {
+                    Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y + 1);
                     Console.Write("Entrée invalide. Veuillez entrer un nombre entier.");
                     Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                     Console.Write("                                                                                           ");
                     Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                     Console.Write("Entrer le numero de l'objet de 0 à " + (worldItems.Count - 1) + "): ");
                 }
-                //input = Console.ReadLine(); // Keep the console open
 
                 Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y);
                 Console.WriteLine("-----------------------------------------------------------------");
@@ -199,7 +199,7 @@ namespace WorldSystem
             switch (Material.Name)
             {
                 case "wood":
-                    return ConsoleColor.Cyan;
+                    return ConsoleColor.DarkRed;
                 case "stone":
                     return ConsoleColor.Green;
                 case "iron":
@@ -211,7 +211,7 @@ namespace WorldSystem
                 case "gold":
                     return ConsoleColor.Yellow;
                 case "diamond":
-                    return ConsoleColor.Blue;
+                    return ConsoleColor.Cyan;
                 default:
                     break;
             }
