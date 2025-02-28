@@ -12,6 +12,6 @@ namespace WorldSystem
         Category Category { get; }
         int Quantity { get; }
         string ToCsvLine();
-        //Material Material { get; }
+        Material Material { get; }
     }
 }
