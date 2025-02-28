@@ -10,6 +10,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using static WorldSystem.Material_List;
+using InventorySystem;
 
 namespace WorldSystem
 {
@@ -113,7 +114,8 @@ namespace WorldSystem
 
             Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y);
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------");
-
+            Inventory inventory = new Inventory();
+            inventory.DisplayInventory();
             while (true)
             {
                 // Ask for the index first
@@ -124,7 +126,15 @@ namespace WorldSystem
 
                 // Read the user input
                 string input = Console.ReadLine();
+                ////InventorySaveSystem.SaveToCsv(inventory.Items,$@"{ Environment.CurrentDirectory}\saveinventory");
+                //List<IItem> i  = InventorySaveSystem.LoadFromCsv($@"{ Environment.CurrentDirectory}\saveinventory");
+                //foreach (IItem item in i)
+                //{
+                //    inventory.AddItem(item);
+                //}
+                //inventory.DisplayInventory();
 
+                //Console.ReadLine();
                 int index;  // Declare the index variable
 
                 // Try to parse the user input into an integer

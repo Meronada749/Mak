@@ -53,6 +53,40 @@ namespace WorldSystem
             }
         }
 
+        public Sword(int Quantity, Rarity Rarity, Resource Resource, SwordName SwordName)
+        {
+            this.SwordName = SwordName;
+            this.Quantity = Quantity;
+            this.Resource = Resource;
+            this.Rarity = Rarity;
+            SwordWeight += Resource.Material.Weight;
+            switch (SwordName)
+            {
+                case SwordName.The_Sword_of_a_Thousand_Truths:
+                    SwordPrice = 10000;
+                    SwordDamage = 1;
+                    break;
+                case SwordName.Ashbringer:
+                    SwordPrice = 1000;
+                    SwordDamage = 2;
+                    break;
+                case SwordName.Excalibur:
+                    SwordPrice = 8000;
+                    SwordDamage = 3;
+                    break;
+                case SwordName.The_Zulqifar:
+                    SwordPrice = 7000;
+                    SwordDamage = 5;
+                    break;
+                case SwordName.Warglaives_of_Azzinoth:
+                    SwordPrice = 5000;
+                    SwordDamage = 6;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void Display(Vector2 Position, Vector2 InputPosition, int worldItems)
         {
             string[] str = {
@@ -69,7 +103,7 @@ namespace WorldSystem
             {
                 Console.SetCursorPosition((int)Position.X, (int)Position.Y);
                 Console.Write("                                                                                           ");
-                Console.SetCursorPosition((int)Position.X,(int)Position.Y++);
+                Console.SetCursorPosition((int)Position.X, (int)Position.Y++);
                 Console.Write(item);
             }
 
@@ -86,7 +120,7 @@ namespace WorldSystem
         }
         public string ToCsvLine()
         {
-            return $"{Category},{Rarity},{Quantity},{Resource.Material.Name},{SwordWeight},{SwordName},{SwordPrice},{SwordDamage}";
+            return $"{Category},{Rarity},{SwordName},{Resource.Material.Name},{Quantity}";
         }
     }
 }

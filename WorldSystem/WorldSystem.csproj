@@ -44,24 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InventorySystem\Inventory\Inventory.cs" />
+    <Compile Include="InventorySystem\Inventory\InventorySaveSystem.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Material_List.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Material.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Category.cs" />
     <Compile Include="WorldSystem\IItem.cs" />
     <Compile Include="WorldSystem\Resource\IResource.cs" />
     <Compile Include="WorldSystem\Shield\IShield.cs" />
+    <Compile Include="WorldSystem\Shield\Shield.cs" />
+    <Compile Include="WorldSystem\Shield\ShieldName.cs" />
     <Compile Include="WorldSystem\Sword\ISword.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Rarity.cs" />
     <Compile Include="WorldSystem\Resource\Resource.cs" />
-    <Compile Include="WorldSystem\Shield\Shield.cs" />
     <Compile Include="WorldSystem\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorldSystem\Shield\ShieldName.cs" />
     <Compile Include="WorldSystem\Sword\Sword.cs" />
     <Compile Include="WorldSystem\Sword\SwordName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

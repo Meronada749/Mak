@@ -36,9 +36,7 @@ namespace WorldSystem
             foreach (string item in str)
             {
                 Console.SetCursorPosition((int)Position.X, (int)Position.Y);
-                Console.WriteLine("                                                                                           ");
-                Console.WriteLine("                                                                                           ");
-                Console.WriteLine("                                                                                           ");
+                Console.Write("                                                                                           ");
                 Console.SetCursorPosition((int)Position.X, (int)Position.Y++);
                 Console.Write(item);
             }
@@ -51,7 +49,7 @@ namespace WorldSystem
 
         public string ToCsvLine()
         {
-            return $"{Category},{Rarity},{Quantity},{Material.Name},{Material.Price},{Material.Weight}";
+            return $"{Category},{Rarity},{Material.Name},{Material.Price},{Quantity}";
         }
     }
 }
