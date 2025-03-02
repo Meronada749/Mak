@@ -25,8 +25,7 @@ namespace InventorySystem
                 csvContent += item.ToCsvLine() + "\n";
 
             File.WriteAllText(filePath, csvContent);
-            Console.SetCursorPosition((int)Inventory.Actualposition.X, (int)Inventory.Actualposition.Y + items.Count + ESPACE);
-            Console.Write($"Inventaire sauvegardé");
+            Console.SetCursorPosition((int)Inventory.Actualposition.X, (int)Inventory.Actualposition.Y + items.Count + ESPACE);            
         }
 
         public static List<IItem> LoadFromCsv(string filePath)

@@ -16,6 +16,7 @@ namespace WorldSystem
 {
     internal class Program
     {
+
         // Déclaration de la fonction Windows qui peut être utilisée pour manipuler la fenêtre
         [DllImport("kernel32.dll")]
         static extern IntPtr GetConsoleWindow();
@@ -27,15 +28,12 @@ namespace WorldSystem
         const int SW_MAXIMIZE = 3;
         static Vector2 GroundPosition = new Vector2(10, 40);
         static Vector2 InputPosition = new Vector2(GroundPosition.X, GroundPosition.Y + 2);
-
+        static Inventory inventory = new Inventory();
         static void Main(string[] args)
         {
-            
+            Console.ReadLine();
             Vector2 ItemsPosition = GroundPosition;
             Vector2 DisplayPosition = new Vector2(2, 2);
-            
-
-            //Console.ReadLine();
 
             IntPtr hWnd = GetConsoleWindow();
 
@@ -46,51 +44,22 @@ namespace WorldSystem
 
             Array rarity = Enum.GetValues(typeof(Rarity));
 
-
-
             List<IItem> worldItems = new List<IItem>()
             {
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(0, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+                 new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
             };
             // Randomize the list
             worldItems = worldItems.OrderBy(x => random.Next()).ToList();
@@ -114,27 +83,22 @@ namespace WorldSystem
 
             Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y);
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------");
-            Inventory inventory = new Inventory();
+            
             inventory.DisplayInventory();
+
             while (true)
             {
+                string input;
+
                 // Ask for the index first
                 Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                 Console.Write("                                                                                           ");
                 Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                 Console.Write("Entrer le numero de l'objet de 0 à " + (worldItems.Count - 1) + ": ");
-
+                input = Console.ReadLine();
                 // Read the user input
-                string input = Console.ReadLine();
-                ////InventorySaveSystem.SaveToCsv(inventory.Items,$@"{ Environment.CurrentDirectory}\saveinventory");
-                //List<IItem> i  = InventorySaveSystem.LoadFromCsv($@"{ Environment.CurrentDirectory}\saveinventory");
-                //foreach (IItem item in i)
-                //{
-                //    inventory.AddItem(item);
-                //}
-                //inventory.DisplayInventory();
+           
 
-                //Console.ReadLine();
                 int index;  // Declare the index variable
 
                 // Try to parse the user input into an integer
@@ -160,7 +124,7 @@ namespace WorldSystem
                         }
                     }
                     else
-                    { 
+                    {
                         Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y + 1);
                         Console.Write("Index hors limites. Veuillez entrer un index valide.");
                         Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
@@ -181,6 +145,12 @@ namespace WorldSystem
 
                 Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y);
                 Console.WriteLine("-----------------------------------------------------------------");
+
+                inventory.AddItem(worldItems[int.Parse(input)], InputPosition, true);
+                inventory.DisplayInventory();
+                inventory.Save(InputPosition);
+                inventory.Load(InputPosition);
+                inventory.DisplayInventory();
             }
         }
 
