@@ -39,8 +39,12 @@ namespace InventorySystem
             foreach (string line in lines)
             {
                 string[] parts = line.Split(',');
+                if (parts[0].Trim() == "null")
+                {
+                    items.Add(null);
+                }
 
-                if (Enum.TryParse(parts[0].Trim(), out Category category))
+                else if (Enum.TryParse(parts[0].Trim(), out Category category))
                 {
                     // Si la catégorie est "Resource", créer un objet Resource
                     if (category == Category.Resource)
@@ -101,5 +105,42 @@ namespace InventorySystem
             Console.Write($"Fichier chargé");
             return items;
         }
+
+        public static void SaveToCsv4(List<IItem> items, string filePath)
+        {
+            if (items == null || items.Count == 0)
+            {
+                Console.WriteLine("No items to save.");
+                return;
+            }
+
+            string csvContent = "";
+
+            // Iterate through the items in the list and ensure none of them are null
+            foreach (IItem item in items)
+            {
+                if (item != null)  // Skip null items
+                {
+                    csvContent += item.ToCsvLine() + "\n";
+                }
+                else
+                {
+                    csvContent+= "null\n";
+                }
+            }
+
+            // If no valid items were found, skip saving
+            if (string.IsNullOrEmpty(csvContent))
+            {
+                Console.WriteLine("No valid items to save.");
+                return;
+            }
+
+            // Save the valid items to the file
+            File.WriteAllText(filePath, csvContent);
+            //Console.WriteLine($"Saved {items.Count} items to {filePath}");
+        }
+
     }
 }
+

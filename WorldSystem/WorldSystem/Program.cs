@@ -68,19 +68,44 @@ namespace WorldSystem
 
             // Randomize the list
             worldItems = worldItems.OrderBy(x => random.Next()).ToList();
-            DisplayWorldItems(ItemsPosition, worldItems);
 
             Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y);
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------");
 
             inventory.DisplayInventory();
 
+            // Ask the user if they want to save the world items
+            Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+            Console.Write("                                                                                           ");
+            Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+            Console.Write("load world items (y,n) : ");
+            string input = Console.ReadLine();
+
+            if (input == "y")
+            {
+                // Prompt the user for the file name
+                Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                Console.Write("                                                                                           ");
+                Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                Console.Write("Nom du fichier : ");
+                input = Console.ReadLine();
+
+                // Ensure a valid file name is provided
+                worldItems = SaveSystem.LoadFromCsv($@"{Environment.CurrentDirectory}\{input}");
+
+                // Provide confirmation
+                Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y + 1);
+                Console.Write($"World items sauvegardé");
+            }
+
+            DisplayWorldItems(ItemsPosition, worldItems);
+
+            SaveWorldItemsToCsv(InputPosition);
+
             inventory.Load(InputPosition);
 
             while (true)
             {
-                string input;
-
                 // Ask for the index first
                 Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
                 Console.Write("                                                                                           ");
@@ -250,5 +275,43 @@ namespace WorldSystem
             else
                 return 'E';
         }
+
+        public static void SaveWorldItemsToCsv(Vector2 inputPosition)
+        {
+            if (worldItems == null || worldItems.Count == 0)
+            {
+                Console.WriteLine("No world items to save.");
+                return;
+            }
+
+            // Ask the user if they want to save the world items
+            Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y);
+            Console.Write("                                                                                           ");
+            Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y);
+            Console.Write("Sauvegarder world items (y,n) : ");
+            string input = Console.ReadLine();
+
+            if (input == "y")
+            {
+                // Prompt the user for the file name
+                Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y);
+                Console.Write("                                                                                           ");
+                Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y);
+                Console.Write("Nom du fichier : ");
+                input = Console.ReadLine();
+
+                // Ensure a valid file name is provided
+                string filePath = $@"{Environment.CurrentDirectory}\{input}.csv";
+
+                // Save the world items to the CSV file
+                SaveSystem.SaveToCsv4(worldItems, filePath);
+
+                // Provide confirmation
+
+                Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y + 1);
+                Console.Write($"World items sauvegardé");
+            }
+        }
     }
 }
+

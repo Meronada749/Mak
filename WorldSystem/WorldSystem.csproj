@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InventorySystem\Inventory\Inventory.cs" />
-    <Compile Include="InventorySystem\Inventory\InventorySaveSystem.cs" />
+    <Compile Include="InventorySystem\Inventory\SaveSystem.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Material_List.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Material.cs" />
     <Compile Include="WorldSystem\enum&amp;Struct\Category.cs" />

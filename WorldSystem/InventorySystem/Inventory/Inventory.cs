@@ -180,7 +180,7 @@ namespace InventorySystem
 
                 input = Console.ReadLine();
 
-                SaveSystem.SaveToCsv(Items, $@"{Environment.CurrentDirectory}\{input}");
+                SaveSystem.SaveToCsv(Items, $@"{Environment.CurrentDirectory}\{input}.csv");
                 Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y + 1);
                 Console.Write($"Inventaire sauvegardé");
             }

@@ -31,7 +31,9 @@ namespace WorldSystem
                 $@"Quantity: {Quantity}",
                 $@"MaterialName: {Material.Name}",
                 $@"MaterialPrice {Material.Price}",
-                $@"MaterialWeight {Material.Weight}"+"\n"
+                $@"MaterialWeight {Material.Weight}"+"\n",
+                $@"                                "+ "\n",
+                $@"                                "+ "\n"
             };
             foreach (string item in str)
             {
