@@ -13,7 +13,7 @@ using static WorldSystem.Material_List;
 
 namespace InventorySystem
 {
-    internal static class InventorySaveSystem
+    internal static class SaveSystem
     {
         private const Byte ESPACE = 5;
         public static void SaveToCsv(List<IItem> items, string filePath)
@@ -98,7 +98,7 @@ namespace InventorySystem
             Console.SetCursorPosition((int)Inventory.Actualposition.X, (int)Inventory.Actualposition.Y + items.Count + ESPACE);
             Console.Write("                                                                                              ");
             Console.SetCursorPosition((int)Inventory.Actualposition.X, (int)Inventory.Actualposition.Y + items.Count + ESPACE);
-            Console.Write($"Inventaire chargé");
+            Console.Write($"Fichier chargé");
             return items;
         }
     }

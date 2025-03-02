@@ -11,6 +11,8 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using static WorldSystem.Material_List;
 using InventorySystem;
+using System.IO.Ports;
+using System.IO;
 
 namespace WorldSystem
 {
@@ -29,62 +31,51 @@ namespace WorldSystem
         static Vector2 GroundPosition = new Vector2(10, 40);
         static Vector2 InputPosition = new Vector2(GroundPosition.X, GroundPosition.Y + 2);
         static Inventory inventory = new Inventory();
+
+        static Random random = new Random();
+        static Array rarity = Enum.GetValues(typeof(Rarity));
+
+        public static List<IItem> worldItems = new List<IItem>()
+        {
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
+            new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
+            null,
+            null,
+            null
+        };
         static void Main(string[] args)
         {
+
             Console.ReadLine();
             Vector2 ItemsPosition = GroundPosition;
             Vector2 DisplayPosition = new Vector2(2, 2);
-
             IntPtr hWnd = GetConsoleWindow();
 
             // Maximiser la fenêtre
             ShowWindow(hWnd, SW_MAXIMIZE);
 
-            Random random = new Random();
-
-            Array rarity = Enum.GetValues(typeof(Rarity));
-
-            List<IItem> worldItems = new List<IItem>()
-            {
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Resource(Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Material:Materials[random.Next(Materials.Count)]),
-                 new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Sword   (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-                 new Shield  (Quantity:random.Next(1, 10), Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)), Resource:new Resource(Quantity:1, Material:Materials[random.Next(Materials.Count)], Rarity:(Rarity)rarity.GetValue(random.Next(rarity.Length)))),
-            };
             // Randomize the list
             worldItems = worldItems.OrderBy(x => random.Next()).ToList();
-
-            int counter = 0;
-
-            foreach (IItem item in worldItems)
-            {
-                Console.SetCursorPosition((int)(ItemsPosition.X += 3), (int)GroundPosition.Y - 1);
-
-                Console.ForegroundColor = ColorItem(item);
-
-                Console.Write($" {RetourneChar(item)}  ");
-
-                Console.ResetColor();
-
-                Console.SetCursorPosition((int)(ItemsPosition.X), (int)GroundPosition.Y - 2);
-
-                Console.Write($" {counter++} ");
-            }
+            DisplayWorldItems(ItemsPosition, worldItems);
 
             Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y);
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------");
-            
+
             inventory.DisplayInventory();
+
+            inventory.Load(InputPosition);
 
             while (true)
             {
@@ -97,7 +88,7 @@ namespace WorldSystem
                 Console.Write("Entrer le numero de l'objet de 0 à " + (worldItems.Count - 1) + ": ");
                 input = Console.ReadLine();
                 // Read the user input
-           
+
 
                 int index;  // Declare the index variable
 
@@ -147,10 +138,68 @@ namespace WorldSystem
                 Console.WriteLine("-----------------------------------------------------------------");
 
                 inventory.AddItem(worldItems[int.Parse(input)], InputPosition, true);
+                DisplayWorldItems(ItemsPosition, worldItems);
+
                 inventory.DisplayInventory();
                 inventory.Save(InputPosition);
-                inventory.Load(InputPosition);
                 inventory.DisplayInventory();
+
+                Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                Console.Write("                                                                                           ");
+                Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                Console.Write("prendre item de l'inventaire (y, n): ");
+                input = Console.ReadLine();
+
+                if (input == "y")
+                {
+                    Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                    Console.Write("                                                                                           ");
+                    Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                    Console.Write("Item de l'inventaire n°: ");
+                    input = Console.ReadLine();
+                    IItem ReturnedItem = inventory.GetItemFromInventory(int.Parse(input));
+
+                    Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                    Console.Write("                                                                                           ");
+                    Console.SetCursorPosition((int)InputPosition.X, (int)InputPosition.Y);
+                    Console.Write("Ou mettere l'objet n°: ");
+                    input = Console.ReadLine();
+
+                    worldItems[int.Parse(input)] = ReturnedItem;
+                    DisplayWorldItems(ItemsPosition, worldItems);
+                    inventory.DisplayInventory();
+                }
+            }
+        }
+
+        public static void DisplayWorldItems(Vector2 ItemsPosition, List<IItem> worldItems)
+        {
+            int counter = 0;
+
+            Console.SetCursorPosition((int)GroundPosition.X, (int)GroundPosition.Y - 1);
+            Console.Write("                                                                                           ");
+
+            foreach (IItem item in worldItems)
+            {
+                Console.SetCursorPosition((int)(ItemsPosition.X += 3), (int)GroundPosition.Y - 1);
+
+                if (item != null)
+                {
+                    Console.ForegroundColor = ColorItem(item);
+
+                    Console.Write($" {RetourneChar(item)}  ");
+
+                    Console.ResetColor();
+                }
+
+                else
+                {
+                    Console.Write(" ");
+                }
+
+                Console.SetCursorPosition((int)(ItemsPosition.X), (int)GroundPosition.Y - 2);
+
+                Console.Write($" {counter++} ");
             }
         }
 

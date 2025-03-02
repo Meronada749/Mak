@@ -114,6 +114,7 @@ namespace InventorySystem
                     {
                         Items.Add(item);
                         currentCapacity += shield.ShieldWeight;
+
                     }
                     else
                     {
@@ -121,7 +122,13 @@ namespace InventorySystem
                         Console.Write("                                                                                           ");
                         Console.WriteLine("Pas assez d'espace.");
                     }
-                }                
+                }
+
+                int index = Program.worldItems.IndexOf(item);
+                if (index != -1)
+                {
+                    Program.worldItems[index] = null;
+                }
             }
         }
 
@@ -139,7 +146,21 @@ namespace InventorySystem
         private void RemoveItemFromInventory(int itemNumber)
         {
             if (itemNumber >= 0 && itemNumber < Items.Count)
+            {
+                if (Items[itemNumber] is Resource resource)
+                {
+                    currentCapacity -= resource.TotalWeight;
+                }
+                else if (Items[itemNumber] is Sword sword)
+                {
+                    currentCapacity -= sword.SwordWeight;
+                }
+                else if (Items[itemNumber] is Shield shield)
+                {
+                    currentCapacity -= shield.ShieldWeight;
+                }
                 Items.RemoveAt(itemNumber);
+            }
         }
 
         public void Save(Vector2 inputPosition)
@@ -159,7 +180,7 @@ namespace InventorySystem
 
                 input = Console.ReadLine();
 
-                InventorySaveSystem.SaveToCsv(Items, $@"{Environment.CurrentDirectory}\{input}");
+                SaveSystem.SaveToCsv(Items, $@"{Environment.CurrentDirectory}\{input}");
                 Console.SetCursorPosition((int)inputPosition.X, (int)inputPosition.Y + 1);
                 Console.Write($"Inventaire sauvegardé");
             }
@@ -181,10 +202,11 @@ namespace InventorySystem
                 Console.Write("Nom du fichier : ");
                 input = Console.ReadLine();
                 
-                foreach (IItem item in InventorySaveSystem.LoadFromCsv($@"{Environment.CurrentDirectory}\{input}"))
+                foreach (IItem item in SaveSystem.LoadFromCsv($@"{Environment.CurrentDirectory}\{input}"))
                 {
                     AddItem(item, inputPosition, false);
                 }
+                DisplayInventory();
             }
         }
 
