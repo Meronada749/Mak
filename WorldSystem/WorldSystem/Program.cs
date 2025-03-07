@@ -114,7 +114,6 @@ namespace WorldSystem
                 input = Console.ReadLine();
                 // Read the user input
 
-
                 int index;  // Declare the index variable
 
                 // Try to parse the user input into an integer
